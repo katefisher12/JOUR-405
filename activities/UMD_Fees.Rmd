@@ -33,7 +33,6 @@ umd_fees_pct <- umd_fees |> mutate(pct_change = (`Fall 2026`- `Fall 2021`)/`Fall
 
 Write a few sentences about what you found in those percentages. What's the story here? What questions do you have?
 
-
-
+When calculating percent change, I noticed that the most drastic change was the fees from the student counseling center. When using the software the percent change for this data was "INF" meaning that the computer can't even generate the change due to how much it changed. For example in Fall 2021 there weren't any UMD fees for the student counseling center but in Fall 2026 students have a fee of $52 to the counseling center. I think this is because of the prevalence of mental health in generation Z since COVID-19 (2020). I would like to know what this counseling center fee goes to, is there a psychiatrist, therapist, or will some of it go to advertisement of counseling services so that other students are aware of it on campus?
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
