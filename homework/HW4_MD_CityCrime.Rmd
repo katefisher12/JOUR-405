@@ -9,6 +9,8 @@ In this assignment, we will be working with a dataset of total crimes reported b
 You will need to load the tidyverse library and the janitor library
 
 ```{r}
+library(tidyverse)
+library(janitor)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv. You will create a dataframe called `md_cities` that contains the data from this URL.
@@ -16,19 +18,22 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 ### Task 2: Load the Data
 
 ```{r}
+md_cities <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv") |> clean_names()
+```
 ```
 ### Task 3: Calculating Rates
 
 Calculate violent and property crime rates for each city for both years using `mutate()`. You'll create four new columns: `violent_rate_2019`, `property_rate_2019`, `violent_rate_2020`, and `property_rate_2020`. You'll need to figure out the proper unit rate, given that there are varying populations. There's no perfect choice; choose the one that works best for you. Save the results to a new dataframe called `md_cities_rates`.
 
 ```{r}
+md_cities_rates <- md_cities |> mutate(violent_rate_2019 = violent2019/pop2019 * 10000, property_rate_2019 = property2019/pop2019 *10000, violent_rate_2020 = violent2020/pop2020 *10000, property_rate_2020 = property2020/pop2020 *10000)
 ```
 
 ### Task 4: Describe the Rates
 
 Examine the new dataframe, `md_cities_rates`, by clicking on it in the Environment tab in RStudio and sorting by the rate columns. Write a couple of sentences about the results, comparing and contrasting the cities with the highest rates (both violent and property) in 2019 and 2020. Do you see any patterns? What does this tell you about crime in Maryland cities? What's the story here?
 
-ANSWER HERE
+Based on the results, the pattern is the city with the highest population also has the highest crime rates. For example, in Gaithersburg, Montgomery County, the population in 2020 was 68,917 and the property and violent crimes combined that year was 1,435. Compared to a smaller city such as Burkittsville in Fredrick, where the population in 2020 was 167 the total crime (both property and violent) in 2020 was only 1. The story here would be that the more populated a city is the more likely it is to have more crime and be less safe. 
 
 
 ### Task 5: Calculate Percentage Change
@@ -36,19 +41,22 @@ ANSWER HERE
 Let's add two percentage change columns to your dataframe: one for violent crime rates and one for property crime rates. You'll calculate the percentage change between 2019 and 2020 for each city. Save the results to a new dataframe called `md_cities_change`.
 
 ```{r}
+md_cities_change <- md_cities |> mutate(violent_pct_change = (violent2020- violent2019)/ violent2019 * 100, property_pct_change = (property2020 - property2019)/property2019 *100)
 ```
 
 ### Task 7: Describe Percentage Changes
 
 Look at the `md_cities_change` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change results. What's more interesting here, the patterns or the outliers? What's the story in the data?
 
-ANSWER HERE
+Majority of cities have a negative percent change, meaning that crime is decreasing in those cities. This isn't neccessarily newsworthy so I would say the best story would be to focus on the outliers instead. Some cities have a positive percent change meaning that the crime is increasing. A few examples of this is Colmar Manor in PG where the percent change for violent crimes is 50% while the property change is 100%. Another example is Cottage City also in PG where the percent change for violent crimes is 150% while the property change is 46.15%. As a reporter I would look into these outliers and see if there are any commonalities between these cities. 
 
 ### Task 8: Tell the Best Story
 
 Write up a lede and nutgraf of a story with the _best_ story idea you've found in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+While crime in most Maryland cities are decreasing, Cottage City in Prince George's County sees a significant increase in property and violent crimes between 2019 and 2020. 
+
+Between 2019 and 2020, Cottage City saw a massive increase in violent crimes of 150% and property crimes of 46.15%. Cottage City's change drastically stands out compared to other Maryland cities who saw a decrease in the same time period. 
 
 ### Task 9: Save Your Work and Put it on GitHub
 
