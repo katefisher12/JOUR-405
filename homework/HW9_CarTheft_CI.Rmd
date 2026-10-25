@@ -1,6 +1,6 @@
 ---
 title: "HW9: Car Theft Confidence Intervals & Margin of Error"
-name: REPLACE WITH YOUR NAME
+name: Kate Fisher
 ---
 
 Your editor wants to know what a "typical" month of car thefts looks like in Prince George's County. Not just the average — she wants to know how confident you can be in that number. Using monthly figures, confidence intervals and margin of error, you'll come up with an answer and decide whether the data supports a clear story. As with the previous homework, provide answers in this notebook when prompted and you will have to fill in values where you see REPLACE_ME. Get started by loading the tidyverse in a new R block.
@@ -60,9 +60,9 @@ We've got a small number of months, so we need to quantify the uncertainty aroun
 theft_summary <- car_thefts |>
   summarize(
     mean_thefts = mean(total),
-    sd_thefts = sd(REPLACE_ME),
+    sd_thefts = sd(total),
     months = n(),
-    se_thefts = sd_thefts / sqrt(REPLACE_ME),
+    se_thefts = sd_thefts / sqrt(months),
     margin_error = qt(0.975, df = months - 1) * se_thefts
   )
 
@@ -73,7 +73,7 @@ theft_summary
 
 **Answer this question:** Explain in your own words what the margin of error tells us here. If you were writing a story, how would you use this number? For example, how would you complete this sentence: "Prince George's County averages about ___ car thefts per month, plus or minus ___."
 
-PUT ANSWERS HERE
+The margin of error tells us the amount of random sampling error there is in the survey or poll result. In this scenario the margin of error is 34 which is a large unreliable value. When writing a story I probably wouldn't be able to use this number since it is such a high amount of marginal error. If I had to I would say, "Prince George's County averages about 375 car thefts per month, plus or minus 34. 
 
 ### Task 5: Build the confidence interval
 
@@ -83,8 +83,8 @@ Now let's turn the margin of error into a full confidence interval — the range
 
 theft_summary <- theft_summary |>
   mutate(
-    ci_lower = mean_thefts - REPLACE_ME,
-    ci_upper = mean_thefts + REPLACE_ME
+    ci_lower = mean_thefts - margin_error,
+    ci_upper = mean_thefts + margin_error
   )
 
 theft_summary |>
@@ -94,7 +94,7 @@ theft_summary |>
 
 **Answer this question:** If a county official claimed "car thefts are down to about 300 per month," does your confidence interval support that claim? What about a claim of 350 per month? Explain how the confidence interval helps you evaluate each claim.
 
-PUT ANSWERS HERE
+Yes the confidence interval would support the claim that car thefts are about 350 per month. Since the lower confidence level is 341 and the upper is 409, 350 lays between the confidence interval but 300 does not.  
 
 ### Task 6: Visualize the data with the confidence interval
 
@@ -155,7 +155,8 @@ comparison
 
 **Answer this question:** How did the margin of error and confidence interval change? What does this tell you about the tradeoff between having more data and being able to make precise claims? If you were covering crime trends, how many months of data would you want before writing a definitive story?
 
-PUT ANSWERS HERE
+The margin of error decreases as the sample size increases. The more the sample size increases the more accurate the poll/survey would be. The confidence interval range also shrunk with more people surveyed. If I were convering crime trends I would want mulitple years of data, probably around 5 years which would be 60 months. 5 years would be a long enough time for the data to be accurate. The margin of error would also be low enough and the confidence interval range would be slimmer so we would be able to use that reliable data in a story.
+
 
 ### Task 8: Reporting with uncertainty
 
@@ -165,7 +166,12 @@ Based on everything you've calculated, answer the following:
 
 2. Your editor says "Just tell me if car thefts are going up or down." Using only the confidence interval (no significance testing yet), what's the most accurate answer you can give? What would you need to do next to answer that question more definitively?
 
-PUT ANSWERS HERE
+Headline: Prince George's County Car Thefts Continue to Decline 
+
+Car thefts in Prince George's County have declined over the past 32 months, with reported numbers dropping substantially from summer 2023 to winter 2026. Throughout this time some months still see an increase in thefts but the trend continues to decrease overall. 
+
+All I can really say is that the number of car thefts are trending downward with a few spikes or out-liers. Next I would need to calculate more data to show exactly when these spikes occurred to give an educated theory. For example, if the spike happened during the summer months over a repeated amount of time I would be able to say that this could be happening when people are more out of their homes and leave their cars unlocked, or vice versa and I could say that it is due to people warming up their cars in the winter. 
+
 
 
 When you are finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
