@@ -166,7 +166,7 @@ Based on everything you've calculated, answer the following:
 
 2. Your editor says "Just tell me if car thefts are going up or down." Using only the confidence interval (no significance testing yet), what's the most accurate answer you can give? What would you need to do next to answer that question more definitively?
 
-Headline: Prince George's County Car Thefts Continue to Decline 
+Prince George's County Car Thefts Continue to Decline 
 
 Car thefts in Prince George's County have declined over the past 32 months, with reported numbers dropping substantially from summer 2023 to winter 2026. Throughout this time some months still see an increase in thefts but the trend continues to decrease overall. 
 
