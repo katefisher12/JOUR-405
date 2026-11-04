@@ -36,8 +36,13 @@ Survey weighting is like adjusting the volume on different voices in a conversat
 ## Our Questions
 
 1. How does weighting affect our estimates of voting intentions?
+If your weight is lower than 1, you're over represented while if it is over 1 you're under represented in the survey. So weighting the survey will help to fix the accurate estimates of voting intentions.
+
 2. Which demographic groups show the largest differences between weighted and unweighted results?
+The group that rarely/never votes shows the largest differences between weighted or unweighted results. Their difference was -3.6 which was the largest compared to the others. 
+
 3. How might weighting influence reporting of this data?
+Weighting influences the reporting by helping create more accurate results. If the sample size is over or under-represented weighting it could help the reporting be more accurate and properly represent the sample size. 
 
 # Data Overview
 
@@ -93,10 +98,14 @@ ggplot(nonvoters_data, aes(x = weight)) +
 **Questions:**
 
 1. What is the range of weights in this dataset?
+The range is from .23 to 3.04. 
 
 2. What does it mean when a respondent has a weight of 0.23? What about 3.04?
+When someone has a weight of 0.23 they countas less than one person. If they have a weight of 3.04 it means they are underrepresented. 
+
 
 3. Why might some respondents be weighted more heavily than others?
+They have fewer respondents so some may end up being weighted more heavily than others.
 
 # Exercise 1: Voter Categories and Weighting
 
@@ -232,7 +241,10 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 **Answer These Questions:**
 
 1. Which voter category shows the biggest difference between weighted and unweighted results?
+The voter category that shows the biggest difference between weighted and unweighted results is rarely/never vote. They dropped -3.6%. 
 
 2. How might these differences affect reporting on likely voter turnout?
+These differences might affect reporting on likely voter turnout because the people who rarely/never vote were over represented, meaning that these people who were likely to not vote or rarely vote may actually vote which could result in a completely different voter turnout. It could help me as a reporter who is reporting on voter turnout, it may increase or decrease based on who is over or under represented. 
 
 3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+These differences exist to show us who we need to adjust the most for our results. It shows us who might be over or under-represented to help us with our overall voter turnout as a reporter. 
