@@ -1,1 +1,32 @@
+---
+title: "Do Ticket Sales Increase with a Teams Success?"
+output: html_notebook
+---
+# Testing teams in the National Football Conference East (Dallas Cowboys, New York Giants, Philadelphia Eagles and Washington Commanders)
+
+```{r}
+library(tidyverse)
+```
+
+```{r load-data}
+ticketprice_data <- read_csv("average_ticket_price_for_dallas_cowboys_home_games_from_2006_to_2023_in_u.s._dollars.csv")
+
+```
+```{r}
+rlang::last_trace()
+```
+
+
+# I was able to download the data froms statista for free with the Dallas Cowboys average ticket price from 2006 to 2023 in CSV format but having troubles opening it with the read_csv code. It is still in my downloads. 
+
+```{r}
+cowboys.score_data <- read_csv("cowboys.csv")
+```
+
+#I have the csv opened in another tab and I cannot figure out how to get the code to read the data. 
+
+#Instead of loading the data into R I am going to download as much as I can and put it into the project folder in my repository. 
+
+#Comparing the prior season's win percentage with the change in price. 
+#What am I am missing from my data is which years these teams had a new stadium which could also affect their ticket prices/sales. I also need to get as many years as I can possibly get. 
 
