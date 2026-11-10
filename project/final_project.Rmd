@@ -28,5 +28,7 @@ cowboys.score_data <- read_csv("cowboys.csv")
 #Instead of loading the data into R I am going to download as much as I can and put it into the project folder in my repository. 
 
 #Comparing the prior season's win percentage with the change in price. 
-#What am I am missing from my data is which years these teams had a new stadium which could also affect their ticket prices/sales. I also need to get as many years as I can possibly get. 
+#What am I am missing from my data is which years these teams had a new stadium which could also affect their ticket prices/sales. These are the last years these teams had new stadiums:Cowboys had a new one in 2009, giants in 2010, eagles 2003, commanders 1997.
+
+I also need to get as many years as I can possibly get and it is hard to find ticket prices for this season because it is still ongoing. I also sent you an email about meeting with you and being able to load my data into R and some more clarification on what is expected to earn the highest grade possible. Please let me know what time works best. Thanks!
 
