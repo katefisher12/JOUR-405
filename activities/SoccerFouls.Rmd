@@ -49,6 +49,6 @@ matches25 |>
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
 
-The results of the correlation calculation (0.015) being so close to zero and the scatter plot being a blob with an almost flat line as a line of best fit show that there really is no correlation between a teams fouls and their successes. When a scatter plot has an almost flat horizontal line it is showing that as the independent variable (fouls) increase or decrease the dependent variable (winnings) stays almost the same. The correlation being close to zero supports this as well. 
+The results of the correlation calculation (0.015) being so close to zero and the scatter plot being a blob with an almost flat line as a line of best fit show that there really is no correlation between a teams fouls and their successes. When a scatter plot has an almost flat horizontal line it is showing that as the independent variable (fouls) increase or decrease the dependent variable (winnings) stays almost the same. The correlation being close to zero supports this as well.
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
