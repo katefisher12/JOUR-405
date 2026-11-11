@@ -52,6 +52,6 @@ pg_murders_heat |>
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
 
-The correlation calculation is 0.58 which is pretty close to 1 meaning that there is likely some correlation between murders and temperature. As for the scatter plot the increase/dips show that as temperatures increase towards the summer months the murders increase as well. On the right side of the scatter plot where there seems to be an incline shows that as temperatures increase to about 70-80 degress so do murder to about 40. 
+The correlation calculation is 0.58 which is pretty close to 1 meaning that there is likely some correlation between murders and temperature. As for the scatter plot the increase/dips show that as temperatures increase towards the summer months the murders increase as well. On the right side of the scatter plot where there seems to be an incline shows that as temperatures increase to about 70-80 degress so do murder to about 40. While there seems to be some correlation that does not mean there is a direct causation between a rise in temperature and a rise in murders. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
