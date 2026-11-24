@@ -9,29 +9,141 @@ output: html_notebook
 # (From City crime rates homework) Based on your results does the team with the best record/most wins also have the higest ticket prices? 
 #Are there any outliers (games that have a higher price with a low winning record) are these statistically signifcant?
 # My overall thoughts are that there could also be a higher priced ticket with a bigger matchup or rival/more popularity to attend those games.
-#
-
-```{r}
-library(tidyverse)
-```
-
-```{r load-data}
-ticketprice_data <- read_csv("average_ticket_price_for_dallas_cowboys_home_games_from_2006_to_2023_in_u.s._dollars.csv")
-
-```
-```{r}
-rlang::last_trace()
-```
-
- 
-
-```{r}
-cowboys.score_data <- read_csv("cowboys.csv")
-```
 
 
 #Comparing the prior season's win percentage with the change in price. 
-<<<<<<< HEAD
-#What am I am missing from my data is which years these teams had a new stadium which could also affect their ticket prices/sales. These are the last years these teams had new stadiums:Cowboys had a new one in 2009, giants in 2010, eagles 2003, commanders 1997.
 
 
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/katefisher12/JOUR-405/main/project/"
+
+# Names match the 29 columns in each team-record CSV, in order.
+column_names <- c(
+  "year", "league", "reported_team",
+  "wins", "losses", "ties",
+  "division_finish", "playoff_result",
+  "points_for", "points_against", "point_difference",
+  "coaches", "av_leader", "passing_leader",
+  "rushing_leader", "receiving_leader",
+  "offense_points_rank", "offense_yards_rank",
+  "defense_points_rank", "defense_yards_rank",
+  "turnover_rank", "points_differential_rank",
+  "yards_differential_rank", "league_teams",
+  "margin_of_victory", "strength_of_schedule",
+  "srs", "offensive_srs", "defensive_srs"
+)
+
+# These columns should remain text.
+text_columns <- c(
+  "league", "reported_team", "division_finish",
+  "playoff_result", "coaches", "av_leader",
+  "passing_leader", "rushing_leader", "receiving_leader"
+)
+
+read_team <- function(filename, team_name) {
+  read_csv(
+    paste0(base_url, filename),
+    skip = 2,
+    col_names = column_names,
+    col_types = cols(.default = col_character())
+  ) |>
+    # Keep season rows, excluding any repeated headers.
+    filter(str_detect(year, "^[0-9]{4}$")) |>
+    mutate(
+      across(-all_of(text_columns), parse_double),
+      year = as.integer(year),
+
+      # Remove playoff asterisks from the original team names.
+      reported_team = str_remove_all(reported_team, fixed("*")),
+
+      # Consistent franchise name, including Washington's older names.
+      team = team_name,
+
+      games = wins + losses + ties,
+      win_pct = (wins + 0.5 * ties) / games
+    ) |>
+    relocate(team, year) |>
+    arrange(year)
+}
+
+cowboys <- read_team("cowboys.csv", "Dallas Cowboys")
+eagles <- read_team("eaglesscore.csv", "Philadelphia Eagles")
+giants <- read_team("giantsscore.csv", "New York Giants")
+commanders <- read_team("commanders.score.csv", "Washington Commanders")
+
+team_records <- bind_rows(cowboys, eagles, giants, commanders)
+
+# Examine the cleaned data.
+glimpse(team_records)
+
+team_records |>
+  select(team, year, wins, losses, ties, win_pct) |>
+  arrange(team, desc(year))
+```
+
+#Just looking at win_pct it looks like for the Commanders their highest win percentage was 1940, Cowboys was 1977, Eagles was 1949, Giants was 1929. 
+
+```{r}
+mean(team_records$win_pct, na.rm = TRUE)
+median(team_records$win_pct, na.rm = TRUE)
+sd(team_records$win_pct, na.rm = TRUE)
+```
+
+# A mean of 0.517 across all team records is telling me that the average winning percentage is about 51.7%. I would expect that a league wide average would be about 50% because every win is a loss for another team. Which means that these specific teams in the NFL East won a little more than they lost or there are outliers in my data that are not accurate. The median on the other hand is exactly .5 which is expected. The gap between mean and median is very small so I would expect the distribution to be pretty symmetric. The Standard Deviation is 0.197. Taking the mean of 0.5 and subtracting/adding 0.197 from it we can expect most team records to fall between 0.303 and 0.697 whichis a pretty wide spread. 
+
+# These are the rest of the calculations you suggested I look into once I can figure out how to load my ticket price data into Rstudio. 
+
+#Percentage changes: Calculate the annual percentage change in ticket prices. Adjusting prices for inflation would help distinguish actual increases from changes in the value of money, but get the basic calculation done.
+
+#Correlation and scatterplots: Compare the previous season's winning percentage with the following season's ticket-price change. This better matches the idea that teams might raise prices after a successful season.
+
+#Regression: Examine whether prior-season winning percentage predicts ticket-price changes. If you combine all four teams, account for differences between teams, since some may consistently charge more regardless of performance.
+
+##***These are the last years these teams had new stadiums: Cowboys had a new one in 2009, giants in 2010, eagles 2003, commanders 1997.*** (Which I need to mark in my data as well)
+
+```{r}
+read_csv("average_ticket_price_for_philadelphia_eagles_home_games_from_2010_to_2023_in_u.s._dollars")
+```
+
+#So I have it downloaded as a CSV file and it is in my project folder in Github I'm not quite sure as to why I can't pull up the ticket price data I think it may be a similar issue to last time as well.
+
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/katefisher12/JOUR-405/main/project/"
+
+# Names match the 29 columns in each team-record CSV, in order.
+column_names <- c(
+  "Year", "Average ticket price in U.S. dollars",
+)
+
+
+read_team <- function(filename, team_name) {
+  read_csv(
+    paste0(base_url, filename),
+    skip = 2,
+    col_names = column_names,
+    col_types = cols(.default = col_character())
+  ) |>
+
+
+cowboys <- read_team("cowboys.csv", "Dallas Cowboys")
+eagles <- read_team("eaglesscore.csv", "Philadelphia Eagles")
+giants <- read_team("giantsscore.csv", "New York Giants")
+commanders <- read_team("commanders.score.csv", "Washington Commanders")
+
+ticket_prices <- bind_rows(cowboys, eagles, giants, commanders)
+
+# Examine the cleaned data.
+glimpse(ticket_prices)
+
+ticket_prices |>
+  select(Year, Average ticket price in U.S. dollars) |>
+  arrange(Average ticket price in U.S. dollars,(year))
+```
+
+# I tried experimenting with the code you gave me but kept getting this error when my files are supposedly exported as CVS's in my github folder. (Error in c("Year", "Average ticket price in U.S. dollars", ) : 
+  argument 3 is empty)
